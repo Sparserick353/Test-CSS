@@ -1,149 +1,22 @@
 </html>
-<style type='text/css'>
-	.embeddedServiceHelpButton div.helpButton button.uiButton,
-	.offlineHelpButton .offlineUiButton,
-	button.sidebarHeader.minimizedContainer {
-		background-color: #015071;
-		border-radius: 25px;
-		height: 48px;
-		min-width: 146px;
-		margin: 0;
-		outline: none;
-		position: fixed;
-		bottom: 60px; /* Adjusted to move the button up */
-		left: 10px;
-		align-items: left;
-	}
-
-	.embeddedServiceHelpButton div.helpButton button.uiButton {
-		background-image: url("https://i.ibb.co/Hp6JdQB/LC.png");
-		background-size: 20px;
-		background-position: 9%;
-		background-repeat: no-repeat;
-		background-size: 25px 25px;
-		box-shadow: none;
-		cursor: pointer;
-		overflow: auto;
-	}
-
-	.embeddedServiceHelpButton .helpButton .uiButton:focus {
-		box-sizing: border-box;
-		margin: 0;
-		padding: 0 12px;
-		line-height: 1;
-		font-size: 1.0em;
-		display: flex;
-		text-shadow: none;
-		flex-direction: row;
-		align-items: center;
-		text-align: right;
-	}
-
-	.embeddedServiceHelpButton .helpButton {
-		margin: 0;
-		position: fixed;
-		bottom: 60px; /* Adjusted to move the button up */
-		left: 10px;
-	}
-
-	.embeddedServiceHelpButton .helpButton .uiButton .embeddedServiceIcon {
-		margin: left;
-		color: #FF8823;
-		text-align: center;
-		overflow: visible;
-		box-shadow: none;
-	}
-
-	.embeddedServiceHelpButton .embeddedServiceIcon::before {
-		display: none;
-	}
-
-	.embeddedServiceHelpButton .embeddedServiceIcon::after {
-		display: none;
-		position: relative;
-		z-index: 1;
-		align-self: stretch;
-		max-width: 100%;
-		line-height: normal;
-		overflow: hidden;
-		white-space: nowrap;
-		text-overflow: ellipsis;
-	}
-
-	.embeddedServiceHelpButton .helpButton .uiButton .helpButtonLabel {
-		position: center;
-		z-index: 1;
-		align-self: stretch;
-		max-width: 100%;
-		line-height: normal;
-		overflow: hidden;
-	}
-
-	.embeddedServiceHelpButton .helpButton:not(.finished) .uiButton .helpButtonLabel {
-		z-index: 1;
-		max-width: 100%;
-		line-height: normal;
-		overflow: hidden;
-		margin-left: 13px;
-		transition: margin-left 0.3s;
-	}
-</style>
-   
-<script type='text/javascript' src='https://service.force.com/embeddedservice/5.0/esw.min.js'></script>
 <script type='text/javascript'>
-	var initESW = function(gslbBaseURL) {
-		embedded_svc.settings.displayHelpButton = true; //Or false
-		embedded_svc.settings.language = ''; //For example, enter 'en' or 'en-US'
+	function initEmbeddedMessaging() {
+		try {
+			embeddedservice_bootstrap.settings.language = 'en_US'; // For example, enter 'en' or 'en-US'
 
-		embedded_svc.settings.defaultMinimizedText = "Contact us!"; //(Defaults to Chat with an Expert)
-        embedded_svc.settings.disabledMinimizedText = 'Offline'; //(Defaults to Agent Offline)\
-      	embedded_svc.settings.smallCompanyLogoImgURL = "https://i.ibb.co/Hp6JdQB/LC.png"
-        embedded_svc.settings.chatbotAvatarImgURL = "https://i.ibb.co/Hp6JdQB/LC.png"
-		embedded_svc.settings.avatarImgURL = "https://i.ibb.co/Hp6JdQB/LC.png"
-		embedded_svc.settings.waitingStateBackgroundImgURL = "https://i.ibb.co/Qpt2KZ5/Linq-Banner.png"
-      
-
-		//embedded_svc.settings.loadingText = ''; //(Defaults to Loading)
-		//embedded_svc.settings.storageDomain = 'yourdomain.com'; //(Sets the domain for your deployment so that visitors can navigate subdomains during a chat session)
-
-		// Settings for Chat
-		//embedded_svc.settings.directToButtonRouting = function(prechatFormData) {
-			// Dynamically changes the button ID based on what the visitor enters in the pre-chat form.
-			// Returns a valid button ID.
-		//};
-		//embedded_svc.settings.prepopulatedPrechatFields = {}; //Sets the auto-population of pre-chat form fields
-		//embedded_svc.settings.fallbackRouting = []; //An array of button IDs, user IDs, or userId_buttonId
-		//embedded_svc.settings.offlineSupportMinimizedText = '...'; //(Defaults to Contact Us)
-
-		embedded_svc.settings.enabledFeatures = ['LiveAgent'];
-		embedded_svc.settings.entryFeature = 'LiveAgent';
-
-		embedded_svc.init(
-			'https://brave-goat-m1xxnw-dev-ed.my.salesforce.com',
-			'https://brave-goat-m1xxnw-dev-ed.my.salesforce-sites.com/liveAgentSetupFlow',
-			gslbBaseURL,
-			'00D8b0000013RMb',
-			'chat',
-			{
-				baseLiveAgentContentURL: 'https://c.la5-c2-ia4.salesforceliveagent.com/content',
-				deploymentId: '5728b000000gFoG',
-				buttonId: '5738b000000gFoA',
-				baseLiveAgentURL: 'https://d.la5-c2-ia4.salesforceliveagent.com/chat',
-				eswLiveAgentDevName: 'chat',
-				isOfflineSupportEnabled: false
-			}
-		);
+			embeddedservice_bootstrap.init(
+				'00D6S000001MVxF',
+				'NCFC_Enhanced_Deployment',
+				'https://northcarolinafc.my.site.com/ESWNCFCEnhancedDeployme1706033757143',
+				{
+					scrt2URL: 'https://northcarolinafc.my.salesforce-scrt.com'
+				}
+			);
+		} catch (err) {
+			console.error('Error loading Embedded Messaging: ', err);
+		}
 	};
-
-	if (!window.embedded_svc) {
-		var s = document.createElement('script');
-		s.setAttribute('src', 'https://brave-goat-m1xxnw-dev-ed.my.salesforce.com/embeddedservice/5.0/esw.min.js');
-		s.onload = function() {
-			initESW(null);
-		};
-		document.body.appendChild(s);
-	} else {
-		initESW('https://service.force.com');
-	}
 </script>
+<script type='text/javascript' src='https://northcarolinafc.my.site.com/ESWNCFCEnhancedDeployme1706033757143/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
+
 </html>
